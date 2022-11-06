@@ -1,3 +1,6 @@
+#include "BankApplication.h"
+#include "BankApplication.cpp"
+
 class client : public BankApplication{
     private:
         string name ;
