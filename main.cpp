@@ -7,6 +7,7 @@
 
 using namespace std;
 
+//class for basic user's account.
 class BankAccount {
 private:
     string AccountID;
@@ -58,6 +59,7 @@ public:
 
 };
 
+//class for saving user's account
 class SavingsBankAccount : public BankAccount {
 private:
     double MinimumBalance ;
@@ -107,6 +109,7 @@ public:
     }
 };
 
+//class for client information.
 class Client {
 private:
     string Name ;
@@ -155,7 +158,6 @@ public:
     }
 
 };
-
 vector<Client> basClients_List ;
 vector<BankAccount> BankAccounts_list ;
 vector<SavingsBankAccount> SavingsBankAccounts_list ;
@@ -181,6 +183,7 @@ public:
 
         cout << "Please Enter Client Address =======> " ;
         getline(cin,ad);
+        //to check if the email is valid
         regex emailformat ("^[a-zA-Z0-9+_.-]+@[a-zA-Z.-]+$") ;
         ret = regex_match(ad, emailformat) ;
         while(!ret)
@@ -194,6 +197,7 @@ public:
 
         cout << "Please Enter Client Phone =========> " ;
         getline(cin,ph);
+        //to check if the phone number is valid.
         regex phoneNumformat ("(011|012|010|015)+[0-9]{8}") ;
         ret = regex_match(ph, phoneNumformat) ;
         while(!ret)
@@ -210,10 +214,12 @@ public:
         cout << "What Type of Account Do You Like? (1) Basic (2) Saving - Type 1 or 2 =========> " ;
         cin >> answer;
 
+        //if the user choose the basic account.
         if(answer == '1'){
             double bal ;
             cout << "Please Enter the Starting Balance =========> " ;
             cin>> bal ;
+            //put ID for user.
             BankAccount account(bal,("FCAI-" + to_string(indexOfBasic++))) ;
             BankAccounts_list.push_back(account);
             a.set_BankAccount(BankAccounts_list[BankAccounts_list.size()-1]);
@@ -221,6 +227,7 @@ public:
             basClients_List.push_back(a);
         }
 
+        //if the user choose the saving account.
         else if(answer == '2'){
             double bal , min_bal ;
             cout << "Please Enter the Starting Balance =========> " ;
@@ -245,6 +252,7 @@ public:
         return id;
     }
 
+    //method to erase FCAI and convert to int.
     static int converToInt(string id){
         //delete all characters and spaces  except numbers
         id.erase(remove_if(id.begin(), id.end(), [](char c) { return !isdigit(c); }), id.end());
@@ -252,6 +260,7 @@ public:
         return stoi(id);
     }
 
+    //if the user choose to print the list.
     static void caseList(){
         string id=getUserId();
         if ((converToInt(id)) > 100) {
@@ -261,6 +270,7 @@ public:
         }
     }
 
+    //if the user choose withdraw.
     static void casewithdraw(){
         string id=getUserId();
         if ((converToInt(id)) > 100) {
@@ -276,6 +286,7 @@ public:
         }
     }
 
+    //if the user choose depsit.
     static void casedeposit(){
         string id=getUserId();
         if ((converToInt(id))> 100) {
